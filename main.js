@@ -1,6 +1,6 @@
 // ==UserScript==
-// @name         Duo.gg
-// @namespace    http://tampermonkey.net/
+// @name         Duo.gg bruteforce
+// @namespace    https://github.com/HigorJardini/Manhattan-Project/
 // @version      0.2
 // @description  op.gg
 // @author       You
