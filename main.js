@@ -78,7 +78,7 @@ async function ButtonClickAction (zEvent) {
 
 
 function hasConsecutiveSequences(str) {
-  for (let i = 0; i < str.length - 3; i++) {
+  for (let i = 0; i < str.length - 4; i++) {
     const sequence = str.slice(i, i + 4);
     if (parseInt(sequence) === parseInt(sequence[0].repeat(4)) + 1) {
       return true;
