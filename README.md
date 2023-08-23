@@ -1,0 +1,24 @@
+# duo.op.gg bruteforce
+Simple script to delete all the unverified accounts
+
+## How to use
+
+1. install a userscript manager ([Violentmonkey](https://violentmonkey.github.io/), [Tampermonkey](https://www.tampermonkey.net/), [Greasemonkey](https://www.greasespot.net/), ...)
+2. install the script:
+    * either click [this link](https://raw.githubusercontent.com/tajnymag/tinder-deblur/main/tinder.user.js) and the manager will install the script for you
+    * or copy the URL below and install it manually through manager's UI
+
+    `https://raw.githubusercontent.com/HigorJardini/Manhattan-Project/main/main.js`
+3. press the bomb button and wait the execution finish.
+
+## How does it work
+
+You can manually guess the password by trial and error without any punishment or verification, so with this script you can easily test all the combinations and go one by one.
+
+**Be prepared** for this script to be patched sooner or later.
+
+## Contributors
+
+<a href="https://github.com/tajnymag/tinder-deblur/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=HigorJardini/Manhattan-Project" />
+</a>
