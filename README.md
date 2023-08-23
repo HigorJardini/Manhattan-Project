@@ -9,7 +9,7 @@ Simple script to delete all the unverified accounts
     * or copy the URL below and install it manually through manager's UI
 
     `https://raw.githubusercontent.com/HigorJardini/Manhattan-Project/main/main.js`
-3. press the bomb button and wait the execution finish.
+3. browse duo.op.gg, press the bomb button and wait the execution finish.
 
 ## How does it work
 
