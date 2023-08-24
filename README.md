@@ -1,5 +1,5 @@
 # duo.op.gg bruteforce - Manhattan Project
-Simple script to delete all the unverified accounts in Duo.gg with bruteforce method
+Simple script to delete all the unverified accounts in duo.op.gg with bruteforce method
 
 ## How to use
 
