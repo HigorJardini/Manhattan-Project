@@ -1,5 +1,5 @@
 # duo.op.gg bruteforce
-Simple script to delete all the unverified accounts
+Simple script to delete all the unverified accounts in Duo.gg with bruteforce method
 
 ## How to use
 
