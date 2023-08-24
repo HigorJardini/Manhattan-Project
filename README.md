@@ -1,6 +1,11 @@
 # duo.op.gg bruteforce - Manhattan Project
 Simple script to delete all the unverified accounts in duo.op.gg with bruteforce method
 
+<p align="center" width="100%">
+    <img src="https://i.imgur.com/OfDFi9C.png">
+</p>
+
+
 ## How to use
 
 1. install a userscript manager ([Violentmonkey](https://violentmonkey.github.io/), [Tampermonkey](https://www.tampermonkey.net/), [Greasemonkey](https://www.greasespot.net/), ...)
@@ -10,6 +15,8 @@ Simple script to delete all the unverified accounts in duo.op.gg with bruteforce
 
     `https://raw.githubusercontent.com/HigorJardini/Manhattan-Project/main/main.js`
 3. browse duo.op.gg, press the bomb button and wait the execution finish.
+
+![alt text](https://i.imgur.com/kdTywuF.gif)
 
 ## How does it work
 
