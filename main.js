@@ -124,7 +124,7 @@ async function downloadCsv(){
     var link = document.createElement("a");
     link.setAttribute("href", encoded);
     link.setAttribute("download", "Manhattan_Project.csv");
-    document.body.appendChild(link); // Required for FF
+    document.body.appendChild(link);
 
     link.click();
   } else {
