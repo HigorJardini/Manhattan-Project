@@ -115,6 +115,8 @@ for (let i = 0; i <= 9999; i++) {
 }
 
 async function downloadCsv(){
+  
+  $('.opgg-gnb-app').removeAttr('style');
 
   var session = sessionStorage.getItem("deleted_accounts");
   if (session != null){
