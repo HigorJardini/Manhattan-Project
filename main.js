@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Duo.gg bruteforce
 // @namespace    https://github.com/HigorJardini/Manhattan-Project/
-// @version      0.5
+// @version      0.6
 // @description  op.gg
 // @author       You
 // @match        *://duo.op.gg/*/lol/
@@ -59,9 +59,14 @@ const Toast = Swal.mixin({
 $("#duo-container > div > section > div.flex.justify-between.items-start.lg\\:items-center > div.flex.i.max-w-full.min-w-0.tems-center.sm\\:flex-col.sm\\:items-start > div > div.relative").remove()
 $("#duo-container > div > section > div.flex.justify-between.items-start.lg\\:items-center > div.flex.max-w-full.min-w-0.lg\\:space-x-2.sm\\:flex-col-reverse.sm\\:items-end.relative > div.flex > button").remove()
 $("#duo-container > div > section > div.flex.justify-between.items-start.lg\\:items-center > div.flex.max-w-full.min-w-0.lg\\:space-x-2.sm\\:flex-col-reverse.sm\\:items-end.relative > div.flex").append("<button id='myButton' class='rounded text-bold py-2.5 px-5 sm:px-4 sm:py-3.5 sm:text-3xs whitespace-nowrap text-white cursor-pointer' style='background-color: #e84057'><i class='fa fa-bomb' aria-hidden='true'></i></button>")
+$("#duo-container > div > section > div.flex.justify-between.items-start.lg\\:items-center > div.flex.max-w-full.min-w-0.lg\\:space-x-2.sm\\:flex-col-reverse.sm\\:items-end.relative").append('<div class="sm:mt-2"><div class="flex" style="justify-content:center;position:relative"><button id="DownloadButton" class="rounded text-bold py-2.5 px-5 sm:px-4 sm:py-3.5 sm:text-3xs whitespace-nowrap text-white cursor-pointer" style="background-color: #5383e8"><i class="fa fa-download" aria-hidden="true"></i></button></div></div>')
 
 document.getElementById ("myButton").addEventListener (
   "click", ButtonClickAction, false
+);
+
+document.getElementById ("DownloadButton").addEventListener (
+  "click", downloadCsv, false
 );
 
 async function ButtonClickAction (zEvent) {
@@ -105,7 +110,7 @@ if (!hasConsecutiveSequences(paddedNumber) && !hasRepeatingNumbers(paddedNumber)
 }
 }
 
-function downloadCsv(){
+async function downloadCsv(){
 
 var session = sessionStorage.getItem("deleted_accounts");
 if (session != null){
@@ -118,6 +123,11 @@ if (session != null){
   document.body.appendChild(link); // Required for FF
 
   link.click();
+} else {
+  await Toast.fire({
+        icon: 'info',
+        title: 'Nenhuma informação disponível para download'
+  })
 }
 
 }
@@ -195,7 +205,7 @@ var found = false;
        }
      } else if (kboom == true) {
        //console.log('Senhas encontrada: ' + i + '/' + senhas.length + ' - (' + senhas[i] + ', ' + kboom + ') - Usuario: ' + name)
-       let obj_deleted = [
+       var obj_deleted = [
                 id,
                 name,
                 senhas[i]
