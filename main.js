@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Duo.gg bruteforce
 // @namespace    https://github.com/HigorJardini/Manhattan-Project/
-// @version      0.8
+// @version      0.7
 // @description  op.gg
 // @author       You
 // @match        *://duo.op.gg/*/lol/
@@ -170,6 +170,7 @@ async function wipeDay(){
   const deleted_users = await saveUsersToDelete([...new Set(numbers)]);
 
   for(y = 0; y < deleted_users.length; y++){
+   i = 0;
    var id   = deleted_users[y][0]
    var name = deleted_users[y][1];
    await Toast.fire({
