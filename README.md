@@ -1,5 +1,7 @@
 # duo.op.gg bruteforce - Manhattan Project
 Simple script to delete all the unverified accounts in duo.op.gg with bruteforce method
+- Objective
+     - This project is to eliminate toxic users that use "notes" from platform duo.op.gg to find others peaples to accomplish racis**,sell por*****,virtual crim** and more. For prevent damaged or discriminations to others users from league of legends community and more games (Valorant,TFT,Overwatch)
 
 <p align="center" width="100%">
     <img src="https://i.imgur.com/OfDFi9C.png">
