@@ -24,6 +24,11 @@ You can manually guess the password by trial and error without any punishment or
 
 **Be prepared** for this script to be patched sooner or later.
 
+## Releases
+ - Export csv file with info from deleted accounts (Name,Password,Date and Time)
+
+    ![alt text](https://i.imgur.com/YsTzGUi.png)
+
 ## Contributors
 
 <a href="https://github.com/HigorJardini/Manhattan-Project/graphs/contributors">
