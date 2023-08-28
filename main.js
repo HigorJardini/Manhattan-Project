@@ -221,11 +221,12 @@ async function httpRequest(id, name) {
         }
       } else if (kboom == true) {
         //console.log('Senhas encontrada: ' + i + '/' + senhas.length + ' - (' + senhas[i] + ', ' + kboom + ') - Usuario: ' + name)
+        let datetime = new Date().toLocaleString('pt-BR', { timeZone: 'UTC' }).split(', ');
         var obj_deleted = [
                   //id,
                   name,
                   senhas[i],
-                  new Date().toLocaleString('pt-BR', { timeZone: 'UTC' })
+                  datetime[0] + ' ' + datetime[1]
                 ]
         await sessionDeletedAccountsSaving(obj_deleted);
 
